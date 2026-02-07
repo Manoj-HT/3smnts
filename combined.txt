@@ -1,0 +1,95 @@
+"hadoop version",
+"hdfs dfs -ls -R -h",
+"hdfs dfs -mkdir -p",
+"hdfs dfs -cp",
+"hdfs dfs -put / -copyFromLocal",
+"hdfs dfs -get / -copyToLocal",
+"hdfs dfs -rm",
+"hdfs dfs -rmdir",
+"hdfs dfs -mv",
+"hdfs dfs -cat file.txt | less report.txt | head -10",
+"hdfs dfs -chmod 444",
+"hdfs dfs -du -h ",
+"hdfs dfs -help mkdir",
+
+"sc.parallelize(List(1, 2, 3, 4, 5))",
+"sc.textFile("/path/to/file.txt")",
+"rdd.collect()",
+"rdd.count()",
+"rdd.first()",
+"rdd.filter(x => x % 2 == 0)     // even numbers",
+"rdd.map(x => x * x)   // square",
+"rdd.flatMap(line => line.split(" "))",
+"rdd.reduce((a, b) => a + b)",
+"pairs.reduceByKey((a, b) => a + b)",
+"rdd.groupByKey()",
+"rdd.distinct()",
+"rdd.sum()",
+"rdd.max()",
+"rdd.min()",
+"rdd.mean()",
+"rdd.stdev()",
+"rdd.variance()",
+"spark.read.json("/path/to/file.json")",
+"df.select("name", "salary")",
+"df.filter(df.salary > 50000)",
+"filtered.count()",
+
+CREATE DATABASE anotherDB;
+CREATE TABLE employee_details (
+  emp_id INT,
+  name STRING,
+  salary INT
+);
+CREATE EXTERNAL TABLE orders1 (
+  order_id INT,
+  order_date STRING,
+  order_customer_id INT,
+  order_status STRING
+)
+PARTITIONED BY (region STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/user/hive/products'
+LOAD DATA LOCAL INPATH '/path/to/ordersfile'
+INTO TABLE anotherDB.orders1;
+SELECT * FROM employee_details;
+WHERE o.amount > 500;
+SELECT *
+FROM Table1 t1
+INNER JOIN Table2 t2
+ON t1.Id = t2.Id;
+SELECT *
+FROM employees e
+LEFT OUTER JOIN departments d
+ON e.dept_id = d.dept_id;
+SELECT *
+FROM orders o
+RIGHT OUTER JOIN customers c
+ON o.customer_id = c.customer_id
+WHERE o.amount > 500;
+
+db.createCollection()
+db.orders.insertOne({
+  order_id: 1,
+  order_status: "CLOSED"
+})
+db.orders.insertMany([
+  { order_id: 1, order_status: "CLOSED" },
+  { order_id: 2, order_status: "OPEN" }
+])
+db.orders.find()
+db.customer_data.find({ city: "Delhi" })
+db.users.find({ age: { $gte: 34 } })
+db.orders.find({
+  order_status: { $in: ["COMPLETE", "CLOSED"] }
+})
+db.orders.countDocuments({
+  order_status: { $in: ["COMPLETE", "CLOSED"] }
+})
+db.customer_data.updateMany(
+  { city: "Bombay" },
+  { $set: { city: "Mumbai" } }
+)
+db.customer_data.deleteMany({ name: "John" })
+use mydb
